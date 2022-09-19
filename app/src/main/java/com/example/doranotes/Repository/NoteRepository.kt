@@ -20,7 +20,9 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.searchByTitle(title)
     }
 
-    suspend fun update(note:Note){
-        noteDao.update(note)
+
+    suspend fun searchNoteById(id: Int?): Note?{
+        return noteDao.searchById(id)
     }
+
 }

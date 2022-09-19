@@ -24,4 +24,7 @@ interface NoteDao {
     @Update
     suspend fun update(note:Note)
 
+    @Query("SELECT * FROM NOTE_TABLE WHERE Id  =:Id")
+    fun searchById(Id: Int?) : Note?
+
 }

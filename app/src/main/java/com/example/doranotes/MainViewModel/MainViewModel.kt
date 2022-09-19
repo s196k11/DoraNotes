@@ -3,10 +3,10 @@ package com.example.doranotes.MainViewModel
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.platform.LocalConfiguration
 import androidx.lifecycle.*
 import com.example.doranotes.Model.Note
 import com.example.doranotes.Repository.NoteRepository
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class MainViewModel(private val repository: NoteRepository) : ViewModel() {
@@ -27,9 +27,15 @@ class MainViewModel(private val repository: NoteRepository) : ViewModel() {
         repository.searchByTitle(title)
     }
 
-    fun update(note:Note) = viewModelScope.launch {
-        repository.update(note)
+//    fun update(note:Note) = viewModelScope.launch {
+//        repository.update(note)
+//    }
+
+
+    fun searchNoteById(id:Int?) = viewModelScope.launch{
+        repository.searchNoteById(id)
     }
+
 }
 
 

@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
@@ -41,7 +42,7 @@ import com.example.doranotes.components.NoteRow
 
 
 @Composable
-fun HomeScreen(viewModel: MainViewModel,navHostController: NavHostController) {
+fun HomeScreen(viewModel: MainViewModel, navHostController: NavHostController) {
     val l = viewModel.getAllNote().observeAsState().value
 
     val config = LocalConfiguration.current
@@ -49,11 +50,11 @@ fun HomeScreen(viewModel: MainViewModel,navHostController: NavHostController) {
 
     val value = rememberSaveable { mutableStateOf("") }
 
-    Column {
+    Column(modifier = Modifier.background(color = Color(0xff57D8FF))) {
 
         Box(modifier = Modifier
             .fillMaxWidth()
-            .height(height / 8),
+            .height(height / 8).background(color = Color(0xff57D8FF)).clip(shape = RoundedCornerShape(10.dp)),
             contentAlignment = Alignment.TopCenter
         ) {
 
@@ -62,7 +63,8 @@ fun HomeScreen(viewModel: MainViewModel,navHostController: NavHostController) {
                     .fillMaxWidth()
                     .padding(vertical = 2.dp, horizontal = 4.dp),
                 textStyle = TextStyle(fontSize = 23.sp),
-                colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.Transparent),
+                colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color(
+                    0xFF00C4FF)),
                 placeholder = { Text(text = "Search") },
                 shape = CircleShape,
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
@@ -74,14 +76,14 @@ fun HomeScreen(viewModel: MainViewModel,navHostController: NavHostController) {
             )
         }
 
-        Box(modifier = Modifier.fillMaxSize()){
+        Box(modifier = Modifier.fillMaxSize()) {
 
-            if (l != null){
-                LazyColumn{
-                    items(l){Note ->
+            if (l != null) {
+                LazyColumn {
+                    items(l) { Note ->
                         NoteRow(height = height, note = Note, onClick = {
                             viewModel.currentNote = Note.title
-                            navHostController.navigate(NavRoutes.DisplayNote.route)
+                            navHostController.navigate("display_note/" + Note.Id)
                         }) {
                             viewModel.delete(Note)
                         }
@@ -89,10 +91,13 @@ fun HomeScreen(viewModel: MainViewModel,navHostController: NavHostController) {
                 }
             }
 
-            FloatingActionButton(onClick = { navHostController.navigate(NavRoutes.AddNote.route) },modifier = Modifier
-                .align(Alignment.BottomEnd)
-                .padding(end = 20.dp, bottom = 20.dp)) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = null,modifier = Modifier.size(40.dp))
+            FloatingActionButton(onClick = { navHostController.navigate(NavRoutes.AddNote.route) },
+                modifier = Modifier
+                    .align(Alignment.BottomEnd)
+                    .padding(end = 20.dp, bottom = 20.dp)) {
+                Icon(imageVector = Icons.Default.Add,
+                    contentDescription = null,
+                    modifier = Modifier.size(40.dp))
             }
         }
     }

@@ -28,7 +28,7 @@ fun NoteRow(height: Dp, note: Note, onClick: () -> Unit, onRemove: () -> Unit) {
         .height(height = height / 7)
         .padding(horizontal = 4.dp, vertical = 2.dp)
         .shadow(shape = RoundedCornerShape(3.dp), elevation = 1.dp)
-        .background(color = Color(0xFF26E6FF))
+        .background(color = Color(0xFF641CE9))
         .clickable { onClick()}
     ) {
         Column() {
