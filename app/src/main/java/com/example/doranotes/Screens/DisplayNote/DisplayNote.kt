@@ -23,7 +23,9 @@ fun DisplayNote(viewModel:MainViewModel, id: Int?) {
 
 
 
-    withContext(Dispatchers.Default){viewModel.getNodeById(id)}
+    suspend fun getNote(id: int): Note{
+        return withContext(Dispatchers.IO){viewModel.getNodeById(id)}.await();
+    }
 
     Column(modifier = Modifier.fillMaxSize()) {
         Box(modifier = Modifier
