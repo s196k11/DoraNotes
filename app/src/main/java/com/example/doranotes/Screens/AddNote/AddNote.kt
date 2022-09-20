@@ -82,7 +82,8 @@ fun AddNote(mainViewModel: MainViewModel,navHostController: NavHostController) {
                 colors = TextFieldDefaults.outlinedTextFieldColors(backgroundColor = Color.Transparent),
                 textStyle = TextStyle(fontSize = 24.sp),
                 keyboardOptions = KeyboardOptions(imeAction = ImeAction.Next),
-                keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(focusDirection = FocusDirection.Down) })
+                keyboardActions = KeyboardActions(onNext = { focusManager.moveFocus(focusDirection = FocusDirection.Down) }),
+                singleLine = true
             )
 
             Spacer(modifier = Modifier.height(10.dp))

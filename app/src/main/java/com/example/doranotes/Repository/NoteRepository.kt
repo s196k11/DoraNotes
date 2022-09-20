@@ -1,5 +1,6 @@
 package com.example.doranotes.Repository
 
+import android.icu.text.CaseMap
 import com.example.doranotes.Data.NoteDao
 import com.example.doranotes.Model.Note
 import kotlinx.coroutines.flow.Flow
@@ -16,8 +17,16 @@ class NoteRepository(private val noteDao: NoteDao) {
         noteDao.delete(note)
     }
 
-    suspend fun searchByTitle(title:String){
-        noteDao.searchByTitle(title)
+    suspend fun update(title: String,description:String,id: Int?){
+        noteDao.update(title = title,description = description,id = id)
+    }
+
+//    suspend fun searchByTitle(title:String){
+//        noteDao.searchByTitle(title)
+//    }
+
+    suspend fun searchByTitle(title: String):Note?{
+        return noteDao.searchByTitle(title)
     }
 
 

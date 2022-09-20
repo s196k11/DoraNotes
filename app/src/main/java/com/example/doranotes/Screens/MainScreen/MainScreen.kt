@@ -37,11 +37,12 @@ fun MainScreen(viewModel: MainViewModel){
             arguments = listOf(navArgument("note_Id") {type = NavType.IntType})
         )
         {backStackEntry ->
-            DisplayNote(viewModel = viewModel,backStackEntry.arguments?.getInt("note_Id"))
+            DisplayNote(viewModel = viewModel,backStackEntry.arguments?.getInt("note_Id"), navController = navcontroller)
         }
 
-        composable(route = NavRoutes.EditNote.route){
-            EditNote()
+        composable(route = NavRoutes.EditNote.route
+        ){
+            EditNote(viewModel,navcontroller)
         }
     }
 }

@@ -21,8 +21,8 @@ interface NoteDao {
     @Query("select * from note_table where title Like :title")
     suspend fun searchByTitle(title:String) : Note
 
-    @Update
-    suspend fun update(note:Note)
+    @Query("UPDATE note_table SET title=:title,description=:description WHERE Id=:id")
+    suspend fun update(title: String,description:String,id: Int?)
 
     @Query("SELECT * FROM NOTE_TABLE WHERE Id  =:Id")
     fun searchById(Id: Int?) : Note?

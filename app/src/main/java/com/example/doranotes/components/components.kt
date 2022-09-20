@@ -36,7 +36,9 @@ fun NoteRow(height: Dp, note: Note, onClick: () -> Unit, onRemove: () -> Unit) {
             Text(text = note.title, fontWeight = FontWeight.Normal,
                 fontSize = 25.sp,
                 letterSpacing = (-0.5).sp,
-                modifier = Modifier.padding(horizontal = 4.dp)
+                modifier = Modifier.padding(horizontal = 4.dp).padding(end = 25.dp),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
             )
 
 
@@ -46,7 +48,7 @@ fun NoteRow(height: Dp, note: Note, onClick: () -> Unit, onRemove: () -> Unit) {
                 color = Color.Gray,
                 modifier = Modifier.padding(
                     horizontal = 4.dp
-                ),
+                ).padding(end = 25.dp),
                 overflow = TextOverflow.Ellipsis
             )
 
